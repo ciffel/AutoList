@@ -1,0 +1,23 @@
+.content {
+  text-align: center;
+  margin-top: 30px;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+#url {
+  width: 60%;
+  margin-right: 20px;
+  font-size: 17.5px;
+  padding: 8px;
+}
+
+.content form {
+  margin-bottom: 40px;
+}
+
+#player {
+  margin-top: 25px;
+}
