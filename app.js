@@ -24,7 +24,7 @@ function parse(obj) {
   for(var i = 0; i < obj.query.count; i++) {
     var url = obj.query.results.a[i].href;
     if(url) {
-      var r = url.match(/https?:\/\/(www.youtube.com\/watch\?v=|youtu.be\/)(\w+)&?/);
+      var r = url.match(/https?:\/\/(www.youtube.com\/watch\?v=|youtu.be\/)([\w-]+)&?/);
       if(r && r[2]) {
         var id = r[2];
         if(id && !idMap.hasOwnProperty(id)) {
@@ -34,6 +34,7 @@ function parse(obj) {
       }
     }
   }
+  console.log(idSet);
 
   if(idSet.length != 0) {
     player.loadPlaylist({
