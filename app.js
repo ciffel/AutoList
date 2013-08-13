@@ -4,7 +4,7 @@ sidMap = {};
 $('play-btn').onclick = function() {
   var yql = "select href from html where url='" + $('url').value + "' and xpath='//a'";
   query(yql, parse_yt);
-  player.style.display = 'inline';
+  $('ytplayer').style.visibility = 'visible';
   if($('icon').classList) {
     $('icon').classList.remove('icon-play');
     $('icon').classList.add('icon-spinner', 'icon-spin');
@@ -84,6 +84,7 @@ function parse_short_url(obj) {
 
 function onYouTubePlayerReady(playerId) {
   player.addEventListener("onStateChange", "onVideoEnded");
+  loadFromQueryString();
 }
 
 function onVideoEnded(newState) {
@@ -99,5 +100,20 @@ function onVideoEnded(newState) {
       });
       sidMap = {};
     }
+  }
+}
+
+function loadFromQueryString() {
+  var s = decodeURIComponent(window.location.search.substring(1));
+  var pairs = s.split('&');
+  var params = {};
+  for(var i = 0; i < pairs.length; i++) {
+    var p = pairs[i].split('=');
+    params[p[0]] = p[1];
+  }
+
+  if(params['url']) {
+    $('url').value = params['url'];
+    $('play-btn').click();
   }
 }
